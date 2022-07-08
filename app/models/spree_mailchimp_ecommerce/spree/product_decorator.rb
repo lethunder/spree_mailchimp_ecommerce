@@ -22,9 +22,8 @@ module SpreeMailchimpEcommerce
       end
 
       def active_storage_url
-        return "" unless images.any?
-
-        Rails.application.routes.url_helpers.rails_blob_url(images.first&.attachment)
+        return "" if images.blank?
+        Rails.application.routes.url_helpers.rails_blob_url(images.first&.attachment) rescue ""
       end
 
       def create_mailchimp_product
